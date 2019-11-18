@@ -6,23 +6,31 @@ import Adapter from "enzyme-adapter-react-16";
 import sinon from "sinon";
 import { isRequired, isAlphabet, isEmail } from "./Utils/validation";
 import RegisterationFormContainer from "./Containers/registerationFormContainer";
+import { getMaxListeners } from "cluster";
 
 enzyme.configure({ adapter: new Adapter() });
 
 it("checks if required validation is working", () => {
-  const testData = isRequired("test");
-  expect(testData !== undefined);
+  const nonEmpty = isRequired("test");
+  expect(nonEmpty !== "is Required");
+  const empty = isRequired("");
+  expect(empty === "is Required");
 });
 
 it("checks if email validation is working", () => {
-  const testData = isAlphabet("test");
-  expect(testData === undefined);
+  const inValidEmail = isEmail("test");
+  expect(inValidEmail === "is Invalid");
+  const validEmail = isEmail("abc@gmail.com");
+  expect(validEmail !== "is Invalid");
 });
 
 it("checks if alphabet validation is working", () => {
-  const testData = isEmail("123");
-  expect(testData === undefined);
+  const nonAlphabet = isAlphabet("123");
+  expect(nonAlphabet === "alphabets only");
+  const alphabet = isAlphabet("abc");
+  expect(alphabet !== "alphabets only");
 });
+
 chai.use(chaiEnzyme());
 
 describe("RigesterationFormContainer", () => {
