@@ -1,12 +1,7 @@
 import React, { useReducer } from "react";
-import { Field, reduxForm } from "redux-form";
-import {
-  isEmail,
-  isAlphabet,
-  isRequired,
-  submit,
-  validateIban
-} from "../Utils/validation";
+import PropTypes from "prop-types";
+import { Field } from "redux-form";
+import { isEmail, isAlphabet, isRequired, submit } from "../Utils/validation";
 import { initialState, successAlertDuration } from "../Utils/constants";
 import renderField from "./renderField";
 
@@ -117,9 +112,10 @@ function RegisterationForm(props) {
     </>
   );
 }
-RegisterationForm = reduxForm({
-  form: "fieldLevelValidation",
-  asyncValidate: validateIban,
-  asyncBlurFields: ["iban"]
-})(RegisterationForm);
+RegisterationForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired
+};
+
 export default RegisterationForm;

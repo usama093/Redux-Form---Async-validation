@@ -1,5 +1,5 @@
 import React from "react";
-import RegisterationForm from "./Components/registerationForm";
+import RegisterationFormContainer from "./Containers/registerationFormContainer";
 import "./App.css";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
         <div className="col-md-12">
           <div className="row">
             <div className="col-md-6 mx-auto">
-              <RegisterationForm></RegisterationForm>
+              <RegisterationFormContainer></RegisterationFormContainer>
             </div>
           </div>
         </div>
